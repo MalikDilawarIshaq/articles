@@ -4,10 +4,10 @@ import SearchBar from '../searchBar';
 import _ from 'lodash';
 
 const Header = (props) => {
-  const { onFilterChange, onApplyFilters, filters, onSearch } = props;
+  const { onFilterChange, onApplyFilters, filters, onSearch, addPreferences } = props;
   const [showDropDown, setShowDropDown] = useState(false);
   return (
-    <header className='flex border-b py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50'>
+    <header className='flex border-b py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-10'>
       <div className='flex justify-between w-full items-center flex-col lg:flex-row'>
         <span>React App</span>
 
@@ -15,9 +15,10 @@ const Header = (props) => {
           <div id="collapseMenu"
             className='w-1/2 max-lg:hidden lg:!block max-lg:w-full max-lg:fixed max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50'>
             <div
-              className='w-[500px] max-w-[500px] lg:flex lg:ml-14 lg:gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50'>
+              className='w-[600px] max-w-[600px] lg:flex lg:ml-14 lg:gap-x-5 max-lg:space-y-3 max-lg:fixed max-lg:bg-white max-lg:w-1/2 max-lg:min-w-[300px] max-lg:top-0 max-lg:left-0 max-lg:p-6 max-lg:h-full max-lg:shadow-md max-lg:overflow-auto z-50'>
               <Filters
                 onFilterChange={onFilterChange}
+                addPreferences={addPreferences}
                 onApplyFilters={onApplyFilters}
                 filters={filters}
                 direction="row"
@@ -33,9 +34,10 @@ const Header = (props) => {
             </svg>
           </button>
 
-          {showDropDown && <div className='absolute top-16 w-full bg-slate-200 left-0 mt-2 py-4'>
+          {showDropDown && <div className='lg:hidden absolute top-16 w-full bg-gray-300 px-8 left-0 mt-2 py-4'>
             <Filters
               onFilterChange={onFilterChange}
+              addPreferences={addPreferences}
               onApplyFilters={onApplyFilters}
               filters={filters}
               direction="col"
@@ -44,6 +46,7 @@ const Header = (props) => {
 
           <SearchBar
             onSearch={onSearch}
+            value={filters.query}
           />
         </div>
       </div>
